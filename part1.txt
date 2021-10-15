@@ -1,0 +1,10 @@
+What can you observe from the printouts of the
+threads on the terminal?
+
+From observing the printouts of the threads on the terminal we can see how threads work. Firstly
+we can see how the specified amount of threads are created, by default like the specifications specify, 5 are created and in the printouts
+we see confirmation that these are created, one by one. When the main process is finished, this process being the one of creating each thread, we can then see how the
+threads run in parallel like the theory says. The printouts shows these as they tell us that the threads are running all in the same time, running the same set of instructions.
+To summarize what multithreading allows us to do is run multiple processes at the same time without interrupting the main process of the program, allowing the program to be
+more efficient than normal, specially when these processes that we are running through the threads take a long time, the reason we use multiple threads in these round robin
+scheduler, because these processes can take a long time, in these case these time that it takes being simulated by getting a random time that each process will take.
