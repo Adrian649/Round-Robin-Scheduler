@@ -4,7 +4,7 @@ package prj_01;
 public class RRScheduler {
 
     /**
-     *Main function where we call each function that is responsible for the program to run
+     *Main function where we call each function that is responsible for the round robin scheduler to run
      *
      */
     public static void main(String[] args){
@@ -39,7 +39,7 @@ public class RRScheduler {
             roundRobine =  new RoundRobinCLL(12, termination_limit);
         }
 
-        ThreadRunnable rrRunnable = new ThreadRunnable(roundRobine);
+        ThreadRunnable rrRunnable = new ThreadRunnable(roundRobine); // Initializes class that implements the runnable interface
         Threads threads = new Threads(no_threads, rrRunnable); // Initiliazes the threads
 
         // This loop goes through each loop and tells it to start their process.

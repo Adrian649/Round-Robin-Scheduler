@@ -9,6 +9,11 @@ class Node {
     public Node previous;
     public Boolean proccessed_flag;
 
+    /**
+     * Constructor for node which will need a pointer to the next node, a pointer the the previous node and its processed flag so we know if theres
+     * any task that we need to do.
+     * @param id - Identifier for node
+     */
     public Node (int id) {
         this.id = id;
         proccessed_flag = true;
@@ -21,6 +26,7 @@ interface RoundRobinCLLInterface {
 }
 
 public class RoundRobinCLL implements RoundRobinCLLInterface {
+    // Default values
     private int num_nodes = 5;
     public Node head = null;
     public Node tail = null;
@@ -78,7 +84,7 @@ public class RoundRobinCLL implements RoundRobinCLLInterface {
     }
 
     /**
-     * Method that goes through the round robin Cll and changes any node that has its processed flag true to false
+     * Method that goes through the round robin Cll and changes any node that has its processed flag from true to false.
      *
      * @return void
      */
@@ -91,7 +97,7 @@ public class RoundRobinCLL implements RoundRobinCLLInterface {
         Node current = head; // We start at the head of the linked list
         while (!stopLoop) {
             if (current.proccessed_flag.equals(true)) { // Checks if we found a processed flag
-                holdRR(current,false); // Tells the threads to change its processed flag to false
+                holdRR(current,false); // Tells the threads to change its processed flag to false.
             }
             current = current.next; // Continue onto the next node.
         }
@@ -162,16 +168,30 @@ public class RoundRobinCLL implements RoundRobinCLLInterface {
 
     }
 
+    /**
+     * Constructor for RoundRobinCLL class which will need the number of nodes that you want the linked list to have
+     * and the number of iterations you want the round robin to do.
+     * @param num_nodes - Size of the Cll, or in other words number of nodes the linked list will have.
+     * @param termination_limit - Number of iterations before the program finishes.
+     */
     public RoundRobinCLL(int num_nodes, int termination_limit) {
         this.num_nodes = num_nodes;
         this.termination_limit = termination_limit;
         fillRoundRubin();
     }
+
+    /**
+     * Constructor for RoundRobinCLL class which will only need the number of nodes that you want the linked list to have.
+     * @param num_nodes - Size of the Cll
+     */
     public RoundRobinCLL(int num_nodes) {
         this.num_nodes = num_nodes;
         fillRoundRubin();
     }
 
+    /**
+     * Default Constructor
+     */
     public RoundRobinCLL() {
         fillRoundRubin();
     }

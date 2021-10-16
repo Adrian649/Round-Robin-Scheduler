@@ -4,7 +4,10 @@ import java.util.*;
 public class Threads {
     public ArrayList<Thread> threads = new ArrayList<Thread>(); // Array containing all threads to be created.
 
-
+    /**
+     * Method responsible for creating each thread.
+     * @param noThreads - Number of threads to be created.
+     */
     public Threads(int noThreads){
        for (int i=0; i<noThreads; i++){
            ThreadRunnable runnable = new ThreadRunnable();
