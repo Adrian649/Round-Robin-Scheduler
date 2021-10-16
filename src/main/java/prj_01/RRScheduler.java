@@ -1,10 +1,19 @@
+//Adrian Irizarry adrian.irizarry@upr.edu
 package prj_01;
 
 public class RRScheduler {
+
+    /**
+     *Main function where we call each function that is responsible for the program to run
+     *
+     */
     public static void main(String[] args){
-        int termination_limit = 100;
-        int no_threads = 5;
-        int project_step = 1;
+        int termination_limit = 100; // Iterations to be done
+        int no_threads = 5; // Number of threads to be used
+        int project_step = 2; // Step of the project that will get executed
+        // These for loops are responsible for running the program with the command provided, the first one takes the value after -t and changes the termination limit.
+        // Second loop takes the value after -p and changes the value of number of threads.
+        // Third loop takes the value after -s and changes the value of the project step.
         for (int i=0; i<args.length; i++) {
             if (args[i].equals("-t") || args[i].equals("--termination")) {
                 termination_limit = Integer.valueOf(args[++i]);
@@ -25,22 +34,24 @@ public class RRScheduler {
 
 
         RoundRobinCLL roundRobine = null;
+        // If we are running the second step we initialize the Cll class.
         if (project_step==2) {
             roundRobine =  new RoundRobinCLL(12, termination_limit);
         }
 
         ThreadRunnable rrRunnable = new ThreadRunnable(roundRobine);
-        Threads threads = new Threads(no_threads, rrRunnable);
+        Threads threads = new Threads(no_threads, rrRunnable); // Initiliazes the threads
 
+        // This loop goes through each loop and tells it to start their process.
         for (int i=0; i<threads.threads.size(); i++) {
             threads.threads.get(i).start();
         }
-
+        // Tells the program that if the Cll is not empty to run findFilledSlot(). For more details about this function look at the RoundRobinCLL class.
         if (roundRobine!=null) roundRobine.findFilledSlot() ;
 
-        System.out.println("Main Finished ... Bye Bye");
+        System.out.println("Main Finished ... Bye Bye"); // Notification for when the main process has finished.
 
-        if (roundRobine!=null) roundRobine.stopLoop = true;
+        if (roundRobine!=null) roundRobine.stopLoop = true; // Stops the process of findFilledSlot() and findEmptySlot()
 
     }
 }
