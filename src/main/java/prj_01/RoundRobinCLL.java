@@ -64,15 +64,30 @@ public class RoundRobinCLL implements RoundRobinCLLInterface {
         /* STARTING FROM THE FIRST NODE IN THE LINKED LIST */
         /*** IMPORTANT:: USE THE holdRR() METHODE TO ACCESS THE LINKED LIST ***/
         /*** TO AVOID RACE CONDITION ***/
+        Node current = head;
+        while (!stopLoop) {
+            if (current.proccessed_flag.equals(true)) {
+                holdRR(current,false);
+            }
+            current = current.next;
+        }
     }
 
     public void findFilledSlot() {
         /* PUT YOUR CODE HERE TO FIND THE FILLED SLOTS */
         /* FOR THE MAIN PROCESS                        */
         /*** IMPORTANT:: USE THE holdRR() METHODE TO ACCESS THE LINKED LIST ***/
+        holdon();
         int count = 0 ;
+        Node current = head;
         while (!stopLoop) {
             /* PUT YOUR CODE HERE TO FIND THE FILLED SLOTS */
+            if (current.proccessed_flag.equals(false)) {
+                holdRR(current,true);
+            }
+            System.out.println("The current is " + current.id);
+            current = current.next;
+            count++;
             if (count>termination_limit) break;
             System.out.println("Main Move No.: " + count%num_nodes + "\t" + toString());
         }
@@ -81,6 +96,32 @@ public class RoundRobinCLL implements RoundRobinCLLInterface {
     private void fillRoundRubin () {
         /* PUT YOUR CODE HERE INITIATE THE CIRCULAR LINKED LIST */
         /* WITH DESIRED NUMBER OF NODES BASED TO THE PROGRAM   */
+        int counter = 2;
+        Node nHead = new Node(1);
+        head = nHead;
+        head.proccessed_flag = true;
+        head.previous = tail;
+        Node nTail = new Node(num_nodes);
+        tail = nTail;
+        tail.proccessed_flag = true;
+        tail.next = head;
+        Node current = head;
+        Node currentLast = tail;
+
+        while (counter < num_nodes) {
+            Node newNode = new Node(counter);
+            newNode.next = currentLast;
+            newNode.previous = current;
+            current.next = newNode;
+            currentLast.previous = newNode;
+
+            current = current.next;
+            currentLast = currentLast.previous;
+            counter++;
+        }
+        current.next = tail;
+
+
     }
 
     public RoundRobinCLL(int num_nodes, int termination_limit) {
